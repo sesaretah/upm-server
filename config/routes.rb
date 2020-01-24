@@ -10,11 +10,13 @@ Rails.application.routes.draw do
     resources :profiles
     resources :channels
     resources :posts
+    resources :roles
     resources :shares
     resources :uploads
     resources :auxiliary_tables
     resources :auxiliary_records
     resources :interactions
+    resources :users
 
     post '/users/login', to: 'users#login'
     post '/users/sign_up', to: 'users#sign_up'

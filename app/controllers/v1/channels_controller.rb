@@ -8,7 +8,7 @@ class V1::ChannelsController < ApplicationController
 
   def show
     @channel = Channel.find(params[:id])
-    render json: { data:  ChannelSerializer.new(@channel, user_id: current_user.id).as_json}, status: :ok
+    render json: { data:  ChannelSerializer.new(@channel, user_id: current_user.id).as_json, klass: 'Channel'}, status: :ok
   end
 
   def create

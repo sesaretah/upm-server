@@ -17,6 +17,7 @@ class V1::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
+      @post.share(params[:channel_id]) if !params[:channel_id].blank?
       render json: { data: PostSerializer.new(@post).as_json, klass: 'Post' }, status: :ok
     end
   end
