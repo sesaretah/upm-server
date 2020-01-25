@@ -24,4 +24,18 @@ class V1::UsersController < ApplicationController
     render json: { data: ActiveModel::SerializableResource.new(users, user_id: current_user.id,  each_serializer: UserSerializer ).as_json, klass: 'User' }, status: :ok
   end
 
+  def assignments
+    user = User.find(params[:user_id])
+    role = Role.find(params[:role_id])
+    user.assign(role.id) if user && role
+    render json: { data:  RoleSerializer.new(role, user_id: current_user.id).as_json, klass: 'Role'}, status: :ok
+  end
+
+  def delete_assignment
+    user = User.find(params[:user_id])
+    role = Role.find(params[:role_id])
+    user.unassign(role.id) if user && role
+    render json: { data:  RoleSerializer.new(role, user_id: current_user.id).as_json, klass: 'Role'}, status: :ok
+  end
+
 end

@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     put '/profiles', to: 'profiles#update'
     get '/profiles/my', to: 'profiles#my'
 
+    post '/roles/abilities', to: 'roles#abilities'
+    get '/roles/abilities/delete', to: 'roles#remove_ability'
+
     resources :profiles
     resources :channels
     resources :posts
@@ -18,6 +21,8 @@ Rails.application.routes.draw do
     resources :interactions
     resources :users
 
+    post '/users/assignments', to: 'users#assignments'
+    get '/users/assignments/delete', to: 'users#delete_assignment'
     post '/users/login', to: 'users#login'
     post '/users/sign_up', to: 'users#sign_up'
 

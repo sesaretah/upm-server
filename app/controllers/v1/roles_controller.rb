@@ -10,7 +10,19 @@ class V1::RolesController < ApplicationController
 
   def show
     @role = Role.find(params[:id])
-    render json: { data:  RoleSerializer.new(@role, user_id: current_user.id).as_json}, status: :ok
+    render json: { data:  RoleSerializer.new(@role, user_id: current_user.id).as_json, klass: 'Role'}, status: :ok
+  end
+
+  def abilities
+    @role = Role.find(params[:id])
+    @role.add_ability(params[:ability_title], params[:ability_value])
+    render json: { data:  RoleSerializer.new(@role, user_id: current_user.id).as_json, klass: 'Role'}, status: :ok
+  end
+
+  def remove_ability
+    @role = Role.find(params[:id])
+    @role.remove_ability(params[:title])
+    render json: { data:  RoleSerializer.new(@role, user_id: current_user.id).as_json, klass: 'Role'}, status: :ok
   end
 
   def create
