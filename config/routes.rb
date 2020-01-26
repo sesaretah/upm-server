@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :auxiliary_records
     resources :interactions
     resources :users
+    resources :comments
 
     post '/users/assignments', to: 'users#assignments'
     get '/users/assignments/delete', to: 'users#delete_assignment'

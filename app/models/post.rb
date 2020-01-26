@@ -4,6 +4,7 @@ class Post < ApplicationRecord
 
   has_many :shares, :dependent => :destroy
   has_many :channels, through: :shares
+  has_many :comments
 
 
   def profile
