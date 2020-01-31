@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   api_version(:module => "V1", :path => {:value => "v1"}) do
 
+    get '/actuals/delete', to: 'actuals#delete'
     get '/profiles/search', to: 'profiles#search'
     put '/profiles', to: 'profiles#update'
     get '/profiles/my', to: 'profiles#my'
@@ -21,6 +22,9 @@ Rails.application.routes.draw do
     resources :interactions
     resources :users
     resources :comments
+    resources :metas
+    resources :actuals
+
 
     post '/users/assignments', to: 'users#assignments'
     get '/users/assignments/delete', to: 'users#delete_assignment'

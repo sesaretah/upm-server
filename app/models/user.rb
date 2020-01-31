@@ -5,6 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one :profile
 
+  has_many :actuals, :dependent => :destroy
+  has_many :metas, through: :actuals
+
   def assign(role_id)
     self.assignments = [] if self.assignments.blank?
     self.assignments << role_id
