@@ -17,8 +17,9 @@ class V1::ActualsController < ApplicationController
   def create
     @actual = Actual.new(actual_params)
     @actual.user_id = current_user.id
+    @actual.meta_id = actual_params["content"][0]["metaId"].to_i
     if @actual.save
-      render json: { data: MetaSerializer.new(@actual.meta).as_json, klass: 'Meta' }, status: :ok
+      render json: { data: ProfileSerializer.new(@actual.user.profile).as_json, klass: 'Profile' }, status: :ok
     end
   end
 
@@ -31,10 +32,10 @@ class V1::ActualsController < ApplicationController
 
   def delete
     @actual = Actual.find_by_uuid(params[:uuid])
-    @meta = @actual.meta
+    @user = @actual.user
     if @actual
       @actual.destroy
-      render json: { data: MetaSerializer.new(@meta).as_json, klass: 'Meta' }, status: :ok
+      render json: { data: ProfileSerializer.new(@user.profile).as_json, klass: 'Profile' }, status: :ok
     end
   end
 

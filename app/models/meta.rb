@@ -9,4 +9,13 @@ class Meta < ApplicationRecord
         item['fid'] = SecureRandom.uuid
       end
     end
+
+    def content
+      for item in self.meta_schema
+        if item['type'] == 'Table'
+           meta = Meta.where(title: item['ref']).first
+           item['content'] = ActiveModel::SerializableResource.new(meta.actuals,  each_serializer: ActualSerializer ).as_json if meta
+        end
+      end
+    end
 end
