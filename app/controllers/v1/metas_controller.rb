@@ -24,8 +24,8 @@ class V1::MetasController < ApplicationController
   end
 
   def update
-    @meta = current_user.meta
-    if @meta.update_attributes(meta_params)
+    @meta = Meta.find(params[:id])
+    if @meta && @meta.update_attributes(meta_params)
       render json: { data: MetaSerializer.new(@meta).as_json, klass: 'Meta' }, status: :ok
     end
   end

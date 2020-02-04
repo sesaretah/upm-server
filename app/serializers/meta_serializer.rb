@@ -1,6 +1,6 @@
 class MetaSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :title, :meta_schema
+  attributes :id, :title, :meta_schema, :label
   #has_many :actuals, serializer: ActualSerializer
   
   def user_actuals
