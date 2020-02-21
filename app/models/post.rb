@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+  after_save ThinkingSphinx::RealTime.callback_for(:post)
   has_many :interactions, :as => :interactionable, :dependent => :destroy
   belongs_to :user
 

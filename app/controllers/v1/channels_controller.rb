@@ -5,6 +5,11 @@ class V1::ChannelsController < ApplicationController
     render json: { data: ActiveModel::SerializableResource.new(channels, user_id: current_user.id,  each_serializer: ChannelSerializer ).as_json, klass: 'Channel' }, status: :ok
   end
 
+  def search
+    channels = Channel.search params[:q], star: true
+    render json: { data: ActiveModel::SerializableResource.new(channels,  each_serializer: ChannelSerializer ).as_json, klass: 'Channel' }, status: :ok
+  end
+
 
   def show
     @channel = Channel.find(params[:id])

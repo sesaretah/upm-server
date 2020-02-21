@@ -7,6 +7,11 @@ class V1::PostsController < ApplicationController
     render json: { data: ActiveModel::SerializableResource.new(posts, user_id: current_user.id,  each_serializer: PostSerializer ).as_json, klass: 'Post' }, status: :ok
   end
 
+  def search
+    posts = Post.search params[:q], star: true
+    render json: { data: ActiveModel::SerializableResource.new(posts,  each_serializer: PostSerializer ).as_json, klass: 'Post' }, status: :ok
+  end
+
 
   def show
     @post = Post.find(params[:id])

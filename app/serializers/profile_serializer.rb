@@ -1,9 +1,21 @@
 class ProfileSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :surename, :fullname,:bio,  :avatar, :metas
+  attributes :id, :name, :surename, :fullname, :bio,  :avatar, :metas, :last_login
   #has_many :posts,  serializer: PostSerializer
   #has_many :actuals, serializer: ActualSerializer
   belongs_to :user
+
+  def last_login
+    object.user.last_sign_in_at
+  end
+
+  def bio
+    if object.bio.blank? 
+      return ""
+    else 
+      object.bio
+    end
+  end
   
   def metas
     result = []

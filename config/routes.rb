@@ -8,6 +8,11 @@ Rails.application.routes.draw do
     put '/profiles', to: 'profiles#update'
     get '/profiles/my', to: 'profiles#my'
 
+    get '/posts/search', to: 'posts#search'
+
+    get '/channels/search', to: 'channels#search'
+
+
     post '/roles/abilities', to: 'roles#abilities'
     get '/roles/abilities/delete', to: 'roles#remove_ability'
 

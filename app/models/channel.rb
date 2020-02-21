@@ -1,4 +1,5 @@
 class Channel < ApplicationRecord
+  after_save ThinkingSphinx::RealTime.callback_for(:channel)
   belongs_to :user
   has_many :interactions, :as => :interactionable, :dependent => :destroy
 
