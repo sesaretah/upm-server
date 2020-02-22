@@ -1,6 +1,6 @@
 class ChannelSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :title, :content, :likes, :bookmarks, :follows, :liked, :bookmarked, :followed, :posts
+  attributes :id, :title, :content, :likes, :bookmarks, :follows, :liked, :bookmarked, :followed, :posts, :avatar
   belongs_to :profile,  serializer: ProfileSerializer
   #has_many :posts,  serializer: PostSerializer
 
@@ -10,6 +10,10 @@ class ChannelSerializer < ActiveModel::Serializer
       result << PostSerializer.new(post).as_json
     end
     return result
+  end
+
+  def avatar
+    Rails.application.routes.default_url_options[:host] + "/images/megaphone.png"
   end
 
   def content

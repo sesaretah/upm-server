@@ -30,6 +30,8 @@ class ProfileSerializer < ActiveModel::Serializer
   def avatar
     if object.avatar.attached?
       Rails.application.routes.default_url_options[:host] + rails_blob_url(object.avatar, only_path: true)
+    else
+      Rails.application.routes.default_url_options[:host] + "/images/default.png"
     end
   end
 end

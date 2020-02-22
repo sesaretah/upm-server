@@ -54,3 +54,4 @@ gem "mini_magick"
 gem 'active_model_serializers'
 gem 'fast_jsonapi'
 gem 'thinking-sphinx'
+gem 'will_paginate'

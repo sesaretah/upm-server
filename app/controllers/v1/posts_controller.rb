@@ -3,12 +3,16 @@ class V1::PostsController < ApplicationController
   def index
     #@friend_ids = Friendship.friend_ids(current_user)
     #posts = Post.where('user_id IN (?)', @friend_ids).order('created_at desc')
-    posts = Post.all
+    posts = Post.paginate(page: params[:page], per_page: 6)
     render json: { data: ActiveModel::SerializableResource.new(posts, user_id: current_user.id,  each_serializer: PostSerializer ).as_json, klass: 'Post' }, status: :ok
   end
 
   def search
-    posts = Post.search params[:q], star: true
+    if !params[:q].blank?
+      posts = Post.search params[:q], star: true
+    else 
+      posts = Post.paginate(page: params[:page], per_page: 6)
+    end
     render json: { data: ActiveModel::SerializableResource.new(posts,  each_serializer: PostSerializer ).as_json, klass: 'Post' }, status: :ok
   end
 
