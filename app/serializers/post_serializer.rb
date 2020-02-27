@@ -1,8 +1,13 @@
 class PostSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :title, :draft, :content, :likes, :bookmarks, :follows, :liked, :bookmarked, :followed
+  attributes :id, :title, :draft, :content, :likes, :bookmarks, :follows, :liked, :bookmarked, :followed, :comments
   belongs_to :profile,  serializer: ProfileSerializer
-  belongs_to :comments,  serializer: CommentSerializer
+  #belongs_to :comments,  serializer: CommentSerializer
+
+  def comments
+    comments = object.comments.order('created_at DESC').last(5)
+    return ActiveModel::SerializableResource.new(comments,  each_serializer: CommentSerializer ).as_json
+  end 
 
   def content
     object.send(:content).to_s
