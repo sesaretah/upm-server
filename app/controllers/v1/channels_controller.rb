@@ -6,7 +6,11 @@ class V1::ChannelsController < ApplicationController
   end
 
   def search
-    channels = Channel.search params[:q], star: true
+    if !params[:q].blank?
+      channels = Channel.search params[:q], star: true, page: params[:page], per_page: 6
+    else 
+      channels = Channel.paginate(page: params[:page], per_page: 6)
+    end
     render json: { data: ActiveModel::SerializableResource.new(channels,  each_serializer: ChannelSerializer ).as_json, klass: 'Channel' }, status: :ok
   end
 

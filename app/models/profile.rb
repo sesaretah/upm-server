@@ -3,6 +3,9 @@ class Profile < ApplicationRecord
   belongs_to :user
   has_one_attached :avatar
   
+  def channels
+    self.user.channels if self.user
+  end
   def fullname
     "#{self.name} #{self.surename}"
   end

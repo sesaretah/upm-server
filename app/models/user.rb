@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   has_many :actuals, :dependent => :destroy
   has_many :metas, through: :actuals
+  has_many :channels
 
   def assign(role_id)
     self.assignments = [] if self.assignments.blank?

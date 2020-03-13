@@ -9,7 +9,7 @@ class V1::PostsController < ApplicationController
 
   def search
     if !params[:q].blank?
-      posts = Post.search params[:q], star: true
+      posts = Post.search params[:q], star: true, page: params[:page], per_page: 6
     else 
       posts = Post.paginate(page: params[:page], per_page: 6)
     end
