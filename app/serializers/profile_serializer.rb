@@ -1,8 +1,7 @@
 class ProfileSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
-  attributes :id, :name, :surename, :fullname, :bio,  :avatar, :metas, :last_login, :channels
+  attributes :id, :name, :surename, :fullname, :bio,  :avatar, :metas, :last_login, :channels, :experties
 
-  #has_many :actuals, serializer: ActualSerializer
   belongs_to :user
 
   def channels

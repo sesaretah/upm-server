@@ -2,7 +2,7 @@ class Role < ApplicationRecord
     def users
         results = []
         for user in User.all
-           results << user if user.assignments.include? self.id
+           results << user if user.assignments && user.assignments.include?(self.id)
         end
         return results
     end

@@ -1,7 +1,7 @@
 class V1::ChannelsController < ApplicationController
 
   def index
-    channels = Channel.all
+    channels = Channel.paginate(page: params[:page], per_page: 6)
     render json: { data: ActiveModel::SerializableResource.new(channels, user_id: current_user.id,  each_serializer: ChannelSerializer ).as_json, klass: 'Channel' }, status: :ok
   end
 

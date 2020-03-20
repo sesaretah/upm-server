@@ -5,7 +5,7 @@ class PostSerializer < ActiveModel::Serializer
   #belongs_to :comments,  serializer: CommentSerializer
 
   def comments
-    comments = object.comments.order('created_at DESC').last(5)
+    comments = object.comments.order('created_at DESC').limit(instance_options[:page].to_i*5)
     return ActiveModel::SerializableResource.new(comments,  each_serializer: CommentSerializer ).as_json
   end 
 

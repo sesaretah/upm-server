@@ -12,6 +12,10 @@ class ChannelSerializer < ActiveModel::Serializer
     return result
   end
 
+  def admins
+    
+  end
+
   def avatar
     Rails.application.routes.default_url_options[:host] + "/images/megaphone.png"
   end

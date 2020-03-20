@@ -1,4 +1,19 @@
 class V1::ProfilesController < ApplicationController
+
+  def add_experties
+    @profile = Profile.find(params[:id])
+    @profile.experties << params[:experties]
+    @profile.save
+    render json: { data: ProfileSerializer.new(@profile).as_json, klass: 'Profile' }, status: :ok
+  end
+
+  def remove_experties
+    @profile = Profile.find(params[:id])
+    @profile.experties.delete(params[:experties])
+    @profile.save
+    render json: { data: ProfileSerializer.new(@profile).as_json, klass: 'Profile' }, status: :ok
+  end
+
   def index
     profiles = Profile.all
     render json: { data: ActiveModel::SerializableResource.new(profiles,  each_serializer: ProfileSerializer ).as_json, klass: 'Profile' }, status: :ok
