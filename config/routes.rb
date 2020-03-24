@@ -9,29 +9,15 @@ Rails.application.routes.draw do
     get '/profiles/my', to: 'profiles#my'
     post '/profiles/add_experties/:id', to: 'profiles#add_experties'
     post '/profiles/remove_experties/:id', to: 'profiles#remove_experties'
-    
-    get '/posts/search', to: 'posts#search'
 
-    get '/channels/search', to: 'channels#search'
 
 
     post '/roles/abilities', to: 'roles#abilities'
     get '/roles/abilities/delete', to: 'roles#remove_ability'
 
-    get '/comments/delete', to: 'comments#destroy'
-
-
     resources :profiles
-    resources :channels
-    resources :posts
     resources :roles
-    resources :shares
-    resources :uploads
-    resources :auxiliary_tables
-    resources :auxiliary_records
-    resources :interactions
     resources :users
-    resources :comments
     resources :metas
     resources :actuals
 
